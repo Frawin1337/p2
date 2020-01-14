@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <time.h>
+int counttoend = 0;
+int yearcount = 0,countyear = 0;
+time_t s1, e1;
+time_t s2, e2;
+int main(void){
+time(&s1);
+    for(counttoend;counttoend<1000000000;counttoend++){
+        int A=0,B=0,C=0;
+        if(counttoend%4==0){A=1;}
+        if(counttoend%100==0){B=1;}
+        if(counttoend%400==0){C=1;}
+
+        if(A&&!(B&&!C)){yearcount++;}
+    }
+    printf("%d\n",yearcount);
+time(&e1);
+counttoend=0;
+time(&s2);
+    for(counttoend;counttoend<1000000000;counttoend++){
+        int A=0,B=0,C=0;
+        if(counttoend%4==0){A=1;}
+        if(counttoend%100==0){B=1;}
+        if(counttoend%400==0){C=1;}
+
+        if((C||!B)&&A){countyear++;}
+
+    }
+    printf("%d\n",countyear);
+time(&e2);
+double t1=difftime(e1,s1);
+double t2=difftime(e2,s2);
+printf("time:%.2f\ntime:%.2f",t1,t2);
+}
